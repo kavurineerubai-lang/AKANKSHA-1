@@ -23,12 +23,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-
-      # Runs assembleDebug explicitly targeting the module
+      # Uses installed gradle directly instead of ./gradlew
       - name: Build Debug APK
-        run: ./gradlew :app:assembleDebug
+        run: gradle :app:assembleDebug
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
