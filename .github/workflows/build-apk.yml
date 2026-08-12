@@ -1,4 +1,3 @@
-
 name: Build Akanksha APK
 
 on:
@@ -15,16 +14,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Extract project ZIP
+      - name: Extract project
         run: |
-  if [ -f "AKANKSHA.APK" ]; then
-    unzip -o "AKANKSHA.APK"
-  elif [ -f "AkankshaChat_AndroidStudio.zip" ]; then
-    unzip -o "AkankshaChat_AndroidStudio.zip"
-  else
-    echo "Project file not found"
-    exit 1
-  fi
+          unzip -o AKANKSHA.APK -d project
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -41,10 +33,11 @@ jobs:
           gradle-version: '8.10.2'
 
       - name: Build APK
+        working-directory: project
         run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Akanksha-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: project/app/build/outputs/apk/debug/app-debug.apk
