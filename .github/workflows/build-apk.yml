@@ -16,7 +16,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Extract project ZIP
-        run: unzip -o AkankshaChat_AndroidStudio.zip
+        run: |
+  if [ -f "AKANKSHA.APK" ]; then
+    unzip -o "AKANKSHA.APK"
+  elif [ -f "AkankshaChat_AndroidStudio.zip" ]; then
+    unzip -o "AkankshaChat_AndroidStudio.zip"
+  else
+    echo "Project file not found"
+    exit 1
+  fi
 
       - name: Setup Java
         uses: actions/setup-java@v4
