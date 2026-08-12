@@ -22,8 +22,7 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
-
-      # Uses installed gradle directly instead of ./gradlew
+        # Uses installed gradle directly instead of ./gradlew
       - name: Build Debug APK
         run: gradle :app:assembleDebug
 
